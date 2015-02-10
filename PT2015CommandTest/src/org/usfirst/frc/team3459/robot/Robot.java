@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 import org.usfirst.frc.team3459.robot.commands.AutonomousCommand;
+import org.usfirst.frc.team3459.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team3459.robot.subsystems.Lifter;
 
 /**
@@ -18,7 +19,8 @@ import org.usfirst.frc.team3459.robot.subsystems.Lifter;
  */
 public class Robot extends IterativeRobot {
 
-	public static final Lifter lifter = new Lifter();
+	public static final Lifter lifter = new Lifter(Constants.PWM_LIFT,Constants.IO_LIFTER_TOP,Constants.IO_LIFTER_BOTTOM);
+	public static final DriveTrain drive = new DriveTrain(Constants.PWM_DRIVE_LEFT,Constants.PWM_DRIVE_RIGHT);
 	public static OI oi;
 
     Command autonomousCommand;

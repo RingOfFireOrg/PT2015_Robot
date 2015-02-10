@@ -15,10 +15,15 @@ public class Constants {
 	//Digital IO
 	public static final int IO_LIFTER_TOP = 0;
 	public static final int IO_LIFTER_BOTTOM = 1;
-	
+	public static final int IO_GRABBER_OPEN = 2;
+	public static final int IO_GRABBER_CLOSE = 3;
+	public static final int IO_GRABBER_PRESSED = 4;
 	
 	//Control Things
 	//Joysticks
+	public static final int J_LEFT_ID = 0;
+	public static final int J_RIGHT_ID = 1;
+	public static final int J_POTENTIOMETER_ID = 2;
 	public static final int J_CONTROL_ID = 3;
 	
 	//Buttons

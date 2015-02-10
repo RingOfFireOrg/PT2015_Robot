@@ -12,13 +12,24 @@ import edu.wpi.first.wpilibj.Joystick;
  */
 public class OI {
 
+	Joystick leftStick;
+	Joystick rightStick;
+	Joystick potentiometers;
 	Joystick controlStick;
+	
 	MyButton goUpButton;
+	
 	Robot myRobot;
 	
 	public OI(Lifter lifter) {
+		
+		leftStick = new Joystick(Constants.J_LEFT_ID);
+		rightStick = new Joystick(Constants.J_RIGHT_ID);
+		potentiometers = new Joystick(Constants.J_POTENTIOMETER_ID);
 		controlStick = new Joystick(Constants.J_CONTROL_ID);
+		
 		goUpButton = new MyButton(controlStick, Constants.B_LIFT_UP);
+		
 		myRobot = new Robot();
 		
 		goUpButton.whenPressed(new LifterUp(lifter));

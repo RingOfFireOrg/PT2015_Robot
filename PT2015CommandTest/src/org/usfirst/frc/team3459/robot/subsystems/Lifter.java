@@ -1,7 +1,5 @@
 package org.usfirst.frc.team3459.robot.subsystems;
 
-import org.usfirst.frc.team3459.robot.Constants;
-
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -12,10 +10,10 @@ public class Lifter extends Subsystem{
 	DigitalInput switch_top;
 	DigitalInput switch_bottom;
 	
-	public Lifter() {
-		motor = new Victor(Constants.PWM_LIFT);
-		switch_top = new DigitalInput(Constants.IO_LIFTER_TOP);
-		switch_bottom = new DigitalInput(Constants.IO_LIFTER_BOTTOM);
+	public Lifter(int motorPwm, int switch1IO, int switch2IO) {
+		motor = new Victor(motorPwm);
+		switch_top = new DigitalInput(switch1IO);
+		switch_bottom = new DigitalInput(switch2IO);
 	}
 
 	@Override
