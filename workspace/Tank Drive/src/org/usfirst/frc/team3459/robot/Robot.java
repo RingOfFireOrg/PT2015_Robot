@@ -56,7 +56,7 @@ public class Robot extends SampleRobot {
         myRobot.setExpiration(0.1);
         
         twist = new Victor(0);
-        elevator = new Jaguar(1);
+d        elevator = new Jaguar(1);
     }
 
     
