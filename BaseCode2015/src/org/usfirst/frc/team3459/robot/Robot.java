@@ -1,7 +1,7 @@
 package org.usfirst.frc.team3459.robot;
 
 
-import edu.wpi.first.wpilibj.Jaguar;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.SampleRobot;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Joystick;
@@ -11,22 +11,38 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 
 public class Robot extends SampleRobot {
-    Joystick leftStick;  // set to ID 1 in DriverStation
-    Joystick rightStick; // set to ID 2 in DriverStation
+	//Joysticks
+    Joystick leftStick; 
+    Joystick rightStick; 
     Joystick controlStick;
     Joystick potentiometers;
     
-    JoystickButton twist1;
-    JoystickButton twist2;
+    //Buttons
+    JoystickButton grabber1;
+    JoystickButton grabber2;
     JoystickButton elevator1;
     JoystickButton elevator2;
     
-    RobotDrive myRobot;  // class that handles basic drive operations
+    RobotDrive myRobot;  //robot drive
     
-    Victor twist;
-    Jaguar elevator;
+    //Grabber*******************************
+    // + Switches
+    DigitalInput closeSwitch;
+    DigitalInput openSwitch;
+    DigitalInput pressureSwitch;
     
-    double twistS, elevatorS;
+    // + Objects
+    Victor grabberMotor;
+    Grabber grabber;
+    
+    //Elevator******************************
+    // + Switches
+    DigitalInput bottomSwitch;
+    DigitalInput topSwitch;
+    
+    // + Objects
+    Victor elevatorMotor;
+    Elevator elevator;
     
     public Robot() {
     	leftStick = new Joystick(0);
@@ -34,16 +50,24 @@ public class Robot extends SampleRobot {
         controlStick = new Joystick(2);
         potentiometers = new Joystick(3);
    
-        twist1 = new JoystickButton(controlStick, 1);
-        twist2 = new JoystickButton(controlStick, 2);
+        grabber1 = new JoystickButton(controlStick, 1);
+        grabber2 = new JoystickButton(controlStick, 2);
         elevator1 = new JoystickButton(controlStick, 3);
         elevator2 = new JoystickButton(controlStick, 4);
         
     	myRobot = new RobotDrive(0, 1);
         myRobot.setExpiration(0.1);
         
-        twist = new Victor(0);
-        elevator = new Jaguar(1);
+        bottomSwitch = new DigitalInput(0);
+        topSwitch = new DigitalInput(1);
+        elevatorMotor = new Victor(2);
+        elevator = new Elevator(elevatorMotor, elevator1, elevator2, topSwitch, bottomSwitch);
+        
+        openSwitch = new DigitalInput(2);
+        closeSwitch = new DigitalInput(3);
+        pressureSwitch = new DigitalInput(4);
+        grabberMotor = new Victor(3);
+        grabber = new Grabber(grabberMotor, grabber1, grabber2, openSwitch, closeSwitch, pressureSwitch);
     }
 
     
@@ -56,36 +80,10 @@ public class Robot extends SampleRobot {
         while (isOperatorControl() && isEnabled()) {
         	myRobot.tankDrive(leftStick, rightStick);	//set the tank drive
         	
-        	twistS = potentiometers.getY();		//set the twist speed
-        	
-        	if(twist1.get()) {					//if the forward button is pressed
-        		if(!twist2.get()) 					//if the backwards button is not pressed
-        			twist.set(twistS);					//set twist forward
-        		else								//if the backwards button is pressed
-        			twist.set(0);						//set twist off
-        	} else {							//if the forward button is not pressed
-        		if(twist2.get()) 					//if the backwards button is pressed
-        			twist.set(-twistS);					//set twist backwards
-        		else								//if the backwards button is not pressed
-        			twist.set(0);						//set twist off
-        	}
-        	
-        	elevatorS = potentiometers.getX();
-        	
-        	if(elevator1.get()) {
-        		if(!elevator2.get()) 
-        			elevator.set(-elevatorS);
-        		else
-        			elevator.set(0);
-        	} else {
-        		if(elevator2.get()) 
-        			elevator.set(elevatorS);
-        		else
-        			elevator.set(0);
-        	}
+        	grabber.update();
+        	elevator.update();
         	
             Timer.delay(0.005);		// wait for a motor update time
         }
     }
-
 }
