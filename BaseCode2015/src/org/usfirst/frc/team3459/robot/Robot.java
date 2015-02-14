@@ -58,7 +58,7 @@ public class Robot extends SampleRobot {
     	myRobot = new RobotDrive(0, 1);
         myRobot.setExpiration(0.1);
         
-        bottomSwitch = new DigitalInput(0);
+        bottomSwitch = new DigitalInput(6);
         topSwitch = new DigitalInput(1);
         elevatorMotor = new Victor(2);
         elevator = new Elevator(elevatorMotor, elevator1, elevator2, topSwitch, bottomSwitch);
