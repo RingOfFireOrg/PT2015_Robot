@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.SampleRobot;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -37,8 +38,8 @@ public class Robot extends SampleRobot {
     
     //Elevator******************************
     // + Switches
-    DigitalInput bottomSwitch;
     DigitalInput topSwitch;
+    DigitalInput bottomSwitch;
     
     // + Objects
     Victor elevatorMotor;
@@ -58,16 +59,17 @@ public class Robot extends SampleRobot {
     	myRobot = new RobotDrive(0, 1);
         myRobot.setExpiration(0.1);
         
-        bottomSwitch = new DigitalInput(6);
-        topSwitch = new DigitalInput(1);
+        topSwitch = new DigitalInput(6);
+        bottomSwitch = new DigitalInput(1);
         elevatorMotor = new Victor(2);
-        elevator = new Elevator(elevatorMotor, elevator1, elevator2, topSwitch, bottomSwitch);
+        elevator = new Elevator(elevatorMotor, elevator1, elevator2, bottomSwitch, topSwitch);
         
-        openSwitch = new DigitalInput(2);
-        closeSwitch = new DigitalInput(3);
+        openSwitch = new DigitalInput(7);
+        closeSwitch = new DigitalInput(8);
         pressureSwitch = new DigitalInput(4);
         grabberMotor = new Victor(3);
         grabber = new Grabber(grabberMotor, grabber1, grabber2, openSwitch, closeSwitch, pressureSwitch);
+
     }
 
     
@@ -78,7 +80,7 @@ public class Robot extends SampleRobot {
         myRobot.setSafetyEnabled(true);
         
         while (isOperatorControl() && isEnabled()) {
-        	myRobot.tankDrive(leftStick, rightStick);	//set the tank drive
+        	myRobot.tankDrive(leftStick.getY()*-1, rightStick.getY()*-1);	//set the tank drive
         	
         	grabber.update();
         	elevator.update();
