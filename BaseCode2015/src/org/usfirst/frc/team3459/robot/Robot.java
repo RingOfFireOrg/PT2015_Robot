@@ -1,6 +1,5 @@
 package org.usfirst.frc.team3459.robot;
 
-
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.SampleRobot;
 import edu.wpi.first.wpilibj.RobotDrive;
@@ -9,8 +8,7 @@ import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-
-
+// this is a comment
 public class Robot extends SampleRobot {
 	//Joysticks
     Joystick leftStick; 
