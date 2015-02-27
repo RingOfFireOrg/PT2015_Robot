@@ -20,7 +20,7 @@ public class Grabber {
 	
 	boolean adjustable;
 	
-	double defaultSpeed = 0.7;
+	double defaultSpeed = 1.0;
 	
 	public Grabber(Victor m, JoystickButton b1, JoystickButton b2, DigitalInput lS, DigitalInput  rS, DigitalInput pS) {
 		motor = m;
@@ -58,15 +58,25 @@ public class Grabber {
 		SmartDashboard.putString("Grabber: ", Double.toString(speed));
 	}
 	
+	public void runAutonomous() {
+		double speed;
+		speed = -getSpeedInput();
+
+		boolean stop_close = speed > 0 && closeSwitch.get();
+		boolean stop_open = speed < 0 && openSwitch.get();
+		
+		if(stop_close || stop_open)
+			speed = 0;
+
+		motor.set(speed);
+
+		SmartDashboard.putString("Grabber: ", Double.toString(speed));
+	}
+	
 	public double getSpeedInput() {
 		double speed;
 		
-		//Speed selection
-		if(adjustable) {
-			speed = (speedStick.getX()+1)/2;
-		} else {
-			speed = defaultSpeed;
-		}
+		speed = getDefaultSpeed();
 		
 		//Button checking
 		if(openButton.get()) {
@@ -88,4 +98,20 @@ public class Grabber {
 		
 		return speed;
 	}
+
+	private double getDefaultSpeed() {
+		double speed;
+		//Speed selection
+		if(adjustable) {
+			speed = (speedStick.getX()+1)/2;
+		} else {
+			speed = defaultSpeed;
+		}
+		return speed;
+	}
+
+	public void stopAutonomous() {
+		motor.set(0);
+	}
+
 }
