@@ -77,7 +77,7 @@ public class Robot extends SampleRobot {
         while (isAutonomous() && isEnabled()) {			//while in auton
         	elapsed = System.currentTimeMillis()-start;
         	
-        	if (elapsed <2000) {			//if first 2 seconds
+        	if (elapsed < 1000) {			//if first 1 seconds
         		myRobot.tankDrive(0.7, 0.7);	//go
         	} else {						//if after 2 seconds
         		myRobot.tankDrive(0, 0);		//stop
