@@ -49,8 +49,8 @@ public class Robot extends SampleRobot {
         controlStick = new Joystick(2);
         potentiometers = new Joystick(3);
    
-        grabber1 = new JoystickButton(controlStick, 1);
-        grabber2 = new JoystickButton(controlStick, 2);
+        grabber1 = new JoystickButton(controlStick, 12);
+        grabber2 = new JoystickButton(controlStick, 11);
         elevator1 = new JoystickButton(controlStick, 3);
         elevator2 = new JoystickButton(controlStick, 4);
         
@@ -70,10 +70,23 @@ public class Robot extends SampleRobot {
 
     }
 
+    //Simple Moving Autonomous
+    public void autonomous() {
+    	long start = System.currentTimeMillis();
+    	long elapsed;
+        while (isAutonomous() && isEnabled()) {			//while in auton
+        	elapsed = System.currentTimeMillis()-start;
+        	
+        	if (elapsed <2000) {			//if first 2 seconds
+        		myRobot.tankDrive(0.7, 0.7);	//go
+        	} else {						//if after 2 seconds
+        		myRobot.tankDrive(0, 0);		//stop
+        	}
+        }
+        myRobot.tankDrive(0, 0);
+    }
     
-    /**
-     * Runs the motors with tank steering.
-     */
+    //
     public void operatorControl() {
         myRobot.setSafetyEnabled(true);
         

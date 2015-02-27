@@ -19,7 +19,7 @@ public class Elevator {
 	
 	boolean adjustable;
 	
-	double defaultSpeed = 0.7;
+	double defaultSpeed = 0.5;
 	
 	public Elevator(Victor m, JoystickButton b1, JoystickButton b2, DigitalInput bS, DigitalInput tS) {
 		motor = m;
