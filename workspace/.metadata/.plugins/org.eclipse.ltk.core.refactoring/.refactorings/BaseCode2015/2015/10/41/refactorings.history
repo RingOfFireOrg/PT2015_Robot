@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename local variable &apos;forward&apos; in &apos;org.usfirst.frc.team3459.robot.Robot.autonomous()&apos; to &apos;forwardTime&apos;&#x0D;&#x0A;- Original project: &apos;BaseCode2015&apos;&#x0D;&#x0A;- Original element: &apos;org.usfirst.frc.team3459.robot.Robot.autonomous().forward&apos;&#x0D;&#x0A;- Renamed element: &apos;forward&apos;&#x0D;&#x0A;- Update references to refactored element" description="Rename local variable &apos;forward&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/src&lt;org.usfirst.frc.team3459.robot{Robot.java[Robot~autonomous@forward!2109!2128!2114!2120!J!0!false" name="forwardTime" references="true" stamp="1444488295602" version="1.0"/>
+</session>
