@@ -112,5 +112,4 @@ public class Grabber {
 	public void stopAutonomous() {
 		motor.set(0);
 	}
-
 }

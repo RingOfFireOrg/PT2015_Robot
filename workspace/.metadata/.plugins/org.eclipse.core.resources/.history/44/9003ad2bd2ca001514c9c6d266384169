@@ -1,0 +1,35 @@
+
+package org.usfirst.frc.team9998.robot;
+
+
+import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.SampleRobot;
+import edu.wpi.first.wpilibj.Timer;
+
+
+public class Robot extends SampleRobot {
+    public static final int SHOOTER_M1 = 0;
+    public static final int SHOOTER_M2 = 0;
+	
+	Joystick stick;
+
+    Shooter shooter = new Shooter();
+    public Robot() {
+        stick = new Joystick(0);
+           
+    }
+
+    public void autonomous() {}
+
+    public void operatorControl() {
+        while (isOperatorControl() && isEnabled()) {
+            
+        	Timer.delay(0.005);		// wait for a motor update time
+        }
+    }
+
+    public void test() {
+    }
+}

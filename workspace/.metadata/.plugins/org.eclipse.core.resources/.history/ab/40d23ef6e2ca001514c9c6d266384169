@@ -1,0 +1,92 @@
+package org.usfirst.frc.team9998.robot;
+
+import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.Servo;
+
+public class Shooter {
+	public static final long TIME_THRESHOLD = 1000;
+	public static final double VOLT_INCREMENT = 0.5;
+	
+	public static final double ANGLE_DOWN = 0;
+	public static final double ANGLE_UP = 1;
+	public static final long TIME_FIRE = 1;
+	
+	CANTalon motor1, motor2;
+	Servo servo1;
+	
+	long lastIncrease;
+	long lastDecrease;
+	
+	long startFire;
+	
+	double voltage = 0;
+	
+	Mode state = Mode.DISABLE;
+	
+	public Shooter(int m1, int m2, int s1) {
+		motor1 = new CANTalon(m1);
+		motor2 = new CANTalon(m2);
+		servo1 = new Servo(s1);
+		
+		motor1.changeControlMode(CANTalon.ControlMode.Voltage);
+		motor2.changeControlMode(CANTalon.ControlMode.Voltage);
+		
+		lastIncrease = System.currentTimeMillis();
+		lastDecrease = lastIncrease;
+	}
+	
+	public void increaseVoltage() {
+		if(System.currentTimeMillis() - lastIncrease > TIME_THRESHOLD) {
+			voltage += VOLT_INCREMENT;
+			lastIncrease = System.currentTimeMillis();
+			updateVoltage();
+		}
+	}
+	
+	public void decreaseVoltage() {
+		if(System.currentTimeMillis() - lastDecrease > TIME_THRESHOLD) {
+			voltage -= VOLT_INCREMENT;
+			lastDecrease = System.currentTimeMillis();
+			updateVoltage();
+		}
+	}
+	
+	private void updateVoltage() {
+		if(enable) {
+	
+	}
+	
+	public void update() {
+		updateVoltage();
+	}
+	
+	public void setShoot() {
+		state = Mode.SHOOT;
+	}
+	
+	public void setPickup() {
+		state = Mode.PICKUP;
+	}
+	
+	public void pickup() {
+		
+	}
+	
+	public void setDisable() {
+		state = Mode.DISABLE;
+		motor1.set(0);
+		motor2.set(0);
+	}
+	
+	public void disable() {
+		
+	}
+	
+	public void fire() {
+		
+	}
+	
+	public enum Mode {
+		SHOOT,PICKUP,DISABLE
+	}
+}

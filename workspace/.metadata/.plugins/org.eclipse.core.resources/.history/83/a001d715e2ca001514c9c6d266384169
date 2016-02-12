@@ -1,0 +1,11 @@
+package org.usfirst.frc.team9998.robot;
+
+import edu.wpi.first.wpilibj.Servo;
+
+public class MyServo {
+	Servo a;
+	
+	public MyServo(int n) {
+		a = new Servo(n);
+	}
+}

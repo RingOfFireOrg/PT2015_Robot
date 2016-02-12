@@ -1,0 +1,52 @@
+
+package org.usfirst.frc.team9998.robot;
+
+
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.SampleRobot;
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+
+
+public class Robot extends SampleRobot {
+    public static final int SHOOTER_M1 = 0;
+    public static final int SHOOTER_M2 = 0;
+    
+    Shooter shooter;
+    Joystick stick;
+    JoystickButton increaseSpeed;
+    JoystickButton decreaseSpeed;
+    
+    public Robot() {
+    	shooter = new Shooter(SHOOTER_M1,SHOOTER_M2);
+        stick = new Joystick(0);
+        
+        increaseSpeed = new JoystickButton(stick,1);
+        decreaseSpeed = new JoystickButton(stick,2);
+    }
+
+    public void autonomous() {}
+
+    public void operatorControl() {
+    	while (isOperatorControl() && isEnabled()) {
+           if(increaseSpeed.get()) {
+        	   if (decreaseSpeed.get()) {
+        		   System.out.println("Shooter: double button press");
+        	   } else {
+        		   shooter.increaseVoltage();
+        	   }
+           } else if (decreaseSpeed.get()) {
+        	   shooter.decreaseVoltage();
+           }
+        	Timer.delay(0.005);		// wait for a motor update time
+        }
+    }
+
+    public void test() {
+    }
+}
+
+
+//
+//boolean increaseSpeedV = false;
+//boolean decreaseSpeedV = false;

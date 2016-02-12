@@ -1,0 +1,34 @@
+package org.usfirst.frc.team9998.robot;
+
+import edu.wpi.first.wpilibj.Servo;
+
+public class Trigger {
+	Servo a;
+	long fireTime = 0;
+	double idleAngle = 0;
+	double fireAngle = 0;
+	boolean firing = false;
+	long lastFire = 0;
+	
+	public Trigger(int n, double idleAngle, double fireAngle, long fireTime) {
+		a = new Servo(n);
+		this.fireTime = fireTime;
+		this.idleAngle = idleAngle;
+		this.fireAngle = fireAngle;
+	}
+	
+	public void fire() {
+		if(!firing) {
+			lastFire = System.currentTimeMillis();
+			firing = true;
+			a.set(fireAngle);
+		}
+	}
+	
+	public void update() {
+		if(firing && lastFire-System.currentTimeMillis() > fireTime) {
+			firing = false;
+			a.set(idleAngle);
+		}
+	}
+}

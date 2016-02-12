@@ -19,4 +19,8 @@
 <fullyQualifiedTypeName name="edu.wpi.first.wpilibj.command.Command"/>
 <fullyQualifiedTypeName name="edu.wpi.first.wpilibj.Joystick"/>
 <fullyQualifiedTypeName name="org.usfirst.frc.team3459.robot.subsystems.DriveTrain"/>
+<fullyQualifiedTypeName name="edu.wpi.first.wpilibj.DigitalOutput"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
+<fullyQualifiedTypeName name="edu.wpi.first.wpilibj.CANTalon.ControlMode"/>
+<fullyQualifiedTypeName name="edu.wpi.first.wpilibj.DriverStation"/>
 </qualifiedTypeNameHistroy>
