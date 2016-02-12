@@ -1,4 +1,4 @@
-package org.usfirst.frc.team3459.robot;
+package org.usfirst.frc.team9999.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Victor;
@@ -50,7 +50,7 @@ public class Grabber {
 		adjustable = true;
 	}
 	
-	public void update() {
+	public void update() { 
 		double speed;
 		speed = getSpeedInput();
 		motor.set(speed);
@@ -60,14 +60,13 @@ public class Grabber {
 	
 	public void runAutonomous() {
 		double speed;
-		speed = -getSpeedInput();
+		speed = -getDefaultSpeed();
 
 		boolean stop_close = speed > 0 && closeSwitch.get();
 		boolean stop_open = speed < 0 && openSwitch.get();
-		
-		if(stop_close || stop_open)
+		if(stop_close || stop_open) {
 			speed = 0;
-
+		}
 		motor.set(speed);
 
 		SmartDashboard.putString("Grabber: ", Double.toString(speed));
@@ -93,8 +92,8 @@ public class Grabber {
 		boolean stop_close = speed > 0 && closeSwitch.get();
 		boolean stop_open = speed < 0 && openSwitch.get();
 		
-		if(stop_close || stop_open)
-			speed = 0;
+//		if(stop_close || stop_open)
+//			speed = 0;
 		
 		return speed;
 	}

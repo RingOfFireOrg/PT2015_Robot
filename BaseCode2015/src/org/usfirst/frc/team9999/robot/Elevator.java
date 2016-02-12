@@ -1,4 +1,4 @@
-package org.usfirst.frc.team3459.robot;
+package org.usfirst.frc.team9999.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Victor;
@@ -19,7 +19,7 @@ public class Elevator {
 
 	boolean adjustable;
 
-	double defaultSpeed = 0.5;
+	double defaultSpeed = 0.9;
 
 	public Elevator(Victor m, JoystickButton b1, JoystickButton b2,
 			DigitalInput bS, DigitalInput tS) {
@@ -55,12 +55,14 @@ public class Elevator {
 
 	public void runAutonomous() {
 		double speed;
-		speed = -getDefaultSpeed();// Limit checking
+		speed = -getDefaultSpeed();
+		
+		// Limit checking
 		boolean stop_top = speed > 0 && bottomSwitch.get();
 		boolean stop_bottom = speed < 0 && topSwitch.get();
-
-		if (stop_top || stop_bottom)
+		if (stop_top || stop_bottom) {
 			speed = 0;
+		}
 		motor.set(speed);
 
 		SmartDashboard.putString("Elevator: ", Double.toString(speed));
@@ -87,8 +89,8 @@ public class Elevator {
 		stop_top = speed > 0 && bottomSwitch.get();
 		stop_bottom = speed < 0 && topSwitch.get();
 
-		if (stop_top || stop_bottom)
-			speed = 0;
+//		if (stop_top || stop_bottom)
+//			speed = 0;
 
 		return speed;
 	}
