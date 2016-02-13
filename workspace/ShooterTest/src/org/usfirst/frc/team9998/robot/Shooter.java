@@ -5,9 +5,9 @@ import edu.wpi.first.wpilibj.DriverStation;
 
 public class Shooter {
 	public static final long TIME_THRESHOLD = 250;
-	public static final double VOLT_INCREMENT = 1;
+	public static final double VALUE_INCREMENT = 0.1;
 	
-	public static final double ANGLE_IDLE = 0;
+	public static final double ANGLE_IDLE = 0;	//servo calibration
 	public static final double ANGLE_FIRE = 1;
 	public static final long TIME_FIRE = 1;
 
@@ -20,7 +20,7 @@ public class Shooter {
 	long lastIncrease;
 	long lastDecrease;
 	
-	double voltage = 9;
+	double value = 9;
 	
 	Mode state = Mode.DISABLE;
 	
@@ -28,24 +28,21 @@ public class Shooter {
 		motor1 = new CANTalon(m1);
 		motor2 = new CANTalon(m2);
 		trigger = new Trigger(s1,ANGLE_IDLE,ANGLE_FIRE,TIME_FIRE);
-		
-//		motor1.changeControlMode(CANTalon.ControlMode.Voltage);
-//		motor2.changeControlMode(CANTalon.ControlMode.Voltage);
-		
+	
 		lastIncrease = System.currentTimeMillis();
 		lastDecrease = lastIncrease;
 	}
 	
-	public void increaseVoltage() {
+	public void increaseSpeed() {
 		if(System.currentTimeMillis() - lastIncrease > TIME_THRESHOLD) {
-			voltage += VOLT_INCREMENT;
+			value += VALUE_INCREMENT;
 			lastIncrease = System.currentTimeMillis();
 		}
 	}
 	
-	public void decreaseVoltage() {
+	public void decreaseSpeed() {
 		if(System.currentTimeMillis() - lastDecrease > TIME_THRESHOLD) {
-			voltage -= VOLT_INCREMENT;
+			value -= VALUE_INCREMENT;
 			lastDecrease = System.currentTimeMillis();
 		}
 	}
@@ -53,15 +50,13 @@ public class Shooter {
 	public void update() {
 		trigger.update();
 		switch(state) {
+		case PICKUP:
 		case DISABLE:
 			setWheels(0);
 			break;
-		case PICKUP:
-			setWheels(0);
-			break;
 		case SHOOT:
-			setWheels(voltage);
-			DriverStation.reportError("Process Shoot " + voltage + "\n", false);
+			setWheels(value);
+			DriverStation.reportError("Process Shoot " + value + "\n", false);
 			break;
 		}
 	}
@@ -71,16 +66,12 @@ public class Shooter {
 		motor2.set(val);
 	}
 	
-	public void setShoot() {
+	public void enableShoot() {
 		state = Mode.SHOOT;
 		DriverStation.reportError("Enter Shoot\n", false);
 	}
 	
-	public void setPickup() {
-		state = Mode.PICKUP;
-	}
-	
-	public void setDisable() {
+	public void disableShoot() {
 		state = Mode.DISABLE;
 	}
 	
@@ -89,3 +80,7 @@ public class Shooter {
 			trigger.fire();
 	}
 }
+
+//public void setPickup() {
+//	state = Mode.PICKUP;
+//}
