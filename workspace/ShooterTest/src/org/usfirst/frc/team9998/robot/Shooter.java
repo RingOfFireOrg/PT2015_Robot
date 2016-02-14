@@ -9,7 +9,7 @@ public class Shooter {
 	
 	public static final double ANGLE_IDLE = 0;	//servo calibration
 	public static final double ANGLE_FIRE = 1;
-	public static final long TIME_FIRE = 1;
+	public static final long TIME_FIRE = 1000;
 
 	public enum Mode {SHOOT,PICKUP,DISABLE}
 	//***************************************************************************************
@@ -20,7 +20,7 @@ public class Shooter {
 	long lastIncrease;
 	long lastDecrease;
 	
-	double value = 9;
+	double value = 1;
 	
 	Mode state = Mode.DISABLE;
 	

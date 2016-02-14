@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 public class Robot extends SampleRobot {
 	public static final int SHOOTER_M1 = 10;
 	public static final int SHOOTER_M2 = 11;
-	public static final int SHOOTER_S1 = 0;
+	public static final int SHOOTER_S1 = 3;
 
 	Shooter shooter;
 	Joystick shootStick;
@@ -33,8 +33,8 @@ public class Robot extends SampleRobot {
 		shooter = new Shooter(SHOOTER_M1, SHOOTER_M2, SHOOTER_S1);
 		shootStick = new Joystick(3);
 
-		shootIncreaseVButton = new JoystickButton(shootStick, 9);
-		shootDecreaseVButton = new JoystickButton(shootStick, 11);
+		shootIncreaseVButton = new JoystickButton(shootStick, 5);
+		shootDecreaseVButton = new JoystickButton(shootStick, 6);
 		shootFireButton = new JoystickButton(shootStick, 1);
 		shootDisableButton = new JoystickButton(shootStick, 4);
 		shootEnableButton = new JoystickButton(shootStick, 3);
@@ -96,7 +96,7 @@ public class Robot extends SampleRobot {
 	}
 
 	public void updateDrive() {
-		drive.drive(leftStick.getY(), rightStick.getY());
+		drive.tankDrive(-leftStick.getY(), -rightStick.getY());
 	}
 
 	public void updateTilt() {

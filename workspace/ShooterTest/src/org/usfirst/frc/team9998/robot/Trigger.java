@@ -26,7 +26,7 @@ public class Trigger {
 	}
 	
 	public void update() {
-		if(firing && lastFire-System.currentTimeMillis() > fireTime) {
+		if(firing && System.currentTimeMillis()-lastFire > fireTime) {
 			firing = false;
 			a.set(idleAngle);
 		}
